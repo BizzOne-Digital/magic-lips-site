@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import Image from "next/image";
 import type { CSSProperties, ReactNode, SyntheticEvent } from "react";
@@ -21,7 +21,7 @@ export default function ShowcaseCard({
   title,
   description,
   imageAlt,
-  accent = "#4C1D95",
+  accent = "#7E6BAD",
   onImageError,
   badges,
 }: ShowcaseCardProps) {

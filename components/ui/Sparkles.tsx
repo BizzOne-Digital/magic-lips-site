@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useState } from "react";
 
 interface Sparkle {
@@ -7,7 +7,7 @@ interface Sparkle {
 }
 
 // Soft palette to match lavender/sky/blush theme
-const COLORS = ["#6D28D9", "#FDE68A", "#FBCFE8", "#93C5FD", "#F0ABFC"];
+const COLORS = ["#9D8EC4", "#FDE68A", "#FBCFE8", "#93C5FD", "#F0ABFC"];
 
 export default function Sparkles({
   count = 16, className = "",

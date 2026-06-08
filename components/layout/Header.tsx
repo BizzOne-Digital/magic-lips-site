@@ -1,27 +1,37 @@
-"use client";
+﻿"use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "/",        label: "Home"    },
-  { href: "/shop",    label: "Shop"    },
-  { href: "/offers",  label: "Offers"  },
-  { href: "/about",   label: "About"   },
+  { href: "/", label: "Home" },
+  { href: "/shop", label: "Shop" },
+  { href: "/offers", label: "Offers" },
+  { href: "/about", label: "About" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [mobileOpen,  setMobileOpen]  = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const itemCount = useCartStore((s) => s.getItemCount());
 
+  const overlay = isHome && !scrolled;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -32,151 +42,128 @@ export default function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  const navClass = overlay
+    ? "text-white/90 hover:text-white hover:bg-white/10"
+    : "text-gray-600 hover:text-[#6147A1]";
+
+  const iconClass = overlay ? "text-white" : "text-gray-600";
+  const iconHover = overlay ? "hover:bg-white/10" : "hover:bg-[#EBE6F7]";
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[100] px-3 sm:px-4 py-2 sm:py-2.5">
-        <motion.nav
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className={`max-w-6xl mx-auto rounded-full px-3 sm:px-4 py-2 flex items-center justify-between gap-2 transition-all duration-500 bg-white/95 shadow-[0_4px_30px_rgba(196,181,253,0.35)] border border-purple-100 ${
-            scrolled ? "shadow-[0_6px_36px_rgba(196,181,253,0.45)]" : ""
-          }`}
-          style={{ backdropFilter: "blur(20px)" }}
-        >
-          {/* Logo */}
+      <div className="bg-[#6147A1] text-white text-center text-xs sm:text-sm py-2 px-4 relative z-[60]">
+        New subscribers get 10% off their first order — use code <strong>MAGIC10</strong>
+      </div>
+
+      <header
+        className={`sticky top-0 z-50 transition-all duration-200 ${
+          overlay
+            ? "bg-transparent border-b border-transparent shadow-none"
+            : `bg-white border-b border-[#EBE6F7] ${scrolled ? "shadow-md" : "shadow-sm"}`
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}>
-              <Image
-                src="/logo.png"
-                alt="Magic Lips"
-                width={40}
-                height={40}
-                className="object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = "/logo.svg";
-                }}
-              />
-            </motion.div>
+            <Image
+              src="/logo.png"
+              alt="Magic Lips"
+              width={36}
+              height={36}
+              className="object-contain"
+              onError={(e) => { (e.target as HTMLImageElement).src = "/logo.svg"; }}
+            />
             <span
-              className="font-bold text-lg hidden sm:block"
-              style={{
-                fontFamily: "var(--font-dancing)",
-                backgroundImage: "linear-gradient(135deg, #5B21B6, #0EA5E9)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+              className={`font-bold text-lg hidden sm:block ${overlay ? "text-white" : "text-[#6147A1]"}`}
+              style={{ fontFamily: "var(--font-dancing)" }}
             >
               Magic Lips
             </span>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm font-medium text-gray-600 hover:text-violet-800 transition-colors duration-300 group"
+                className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${navClass}`}
               >
                 {link.label}
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full bg-gradient-to-r from-violet-400 to-sky-400 group-hover:w-full transition-all duration-300 ease-out" />
               </Link>
             ))}
           </nav>
 
-          {/* Right side */}
           <div className="flex items-center gap-2">
-            {/* Cart */}
-            <Link href="/cart" className="relative">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 rounded-full hover:bg-violet-100 transition-colors"
-              >
-                <ShoppingBag className="w-5 h-5 text-gray-600" />
-                {itemCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-gradient-to-r from-violet-500 to-sky-400 text-white text-[9px] font-bold flex items-center justify-center"
-                  >
-                    {itemCount > 9 ? "9+" : itemCount}
-                  </motion.span>
-                )}
-              </motion.div>
+            <Link href="/cart" className={`relative p-2 rounded-lg transition-colors duration-200 ${iconHover}`}>
+              <ShoppingBag className={`w-5 h-5 ${iconClass}`} />
+              {mounted && itemCount > 0 && (
+                <span className={`absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-white text-[9px] font-bold flex items-center justify-center ${overlay ? "bg-[#D4AF37] text-[#1F2937]" : "bg-[#6147A1]"}`}>
+                  {itemCount > 9 ? "9+" : itemCount}
+                </span>
+              )}
             </Link>
 
-            {/* CTA */}
-            <Link href="/shop" className="hidden sm:flex btn-primary text-sm px-5 py-2">
-              Shop Now
-            </Link>
+            {overlay ? (
+              <>
+                <Link
+                  href="/shop"
+                  className="hidden md:inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold text-[#1F2937] bg-[#D4AF37] hover:bg-[#c9a430] transition-all duration-200"
+                >
+                  Shop Now
+                </Link>
+                <Link
+                  href="/contact"
+                  className="hidden sm:inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold text-white border border-white/35 bg-white/10 hover:bg-white/20 transition-all duration-200"
+                >
+                  Contact
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/contact" className="hidden sm:inline-flex btn-primary text-sm px-4 py-2">
+                  Contact
+                </Link>
+                <Link href="/shop" className="hidden md:inline-flex btn-secondary text-sm px-4 py-2">
+                  Shop
+                </Link>
+              </>
+            )}
 
-            {/* Hamburger */}
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-full hover:bg-violet-100 transition-colors"
+              className={`lg:hidden p-2 rounded-lg transition-colors duration-200 ${iconHover}`}
+              aria-label="Menu"
             >
-              {mobileOpen
-                ? <X    className="w-5 h-5 text-gray-600" />
-                : <Menu className="w-5 h-5 text-gray-600" />
-              }
+              {mobileOpen ? <X className={`w-5 h-5 ${iconClass}`} /> : <Menu className={`w-5 h-5 ${iconClass}`} />}
             </button>
           </div>
-        </motion.nav>
+        </div>
 
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[110] bg-black/40 lg:hidden"
+        {mobileOpen && (
+          <>
+            <div className="fixed inset-0 z-40 bg-black/30 lg:hidden" onClick={() => setMobileOpen(false)} />
+            <nav className="lg:hidden absolute left-0 right-0 top-full bg-white border-b border-[#EBE6F7] shadow-md z-50 py-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block px-6 py-3 text-sm font-medium text-gray-700 hover:bg-[#EBE6F7] hover:text-[#6147A1] transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/cart"
                 onClick={() => setMobileOpen(false)}
-              />
-              <motion.div
-                initial={{ opacity: 0, y: -10, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.97 }}
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:hidden fixed left-3 right-3 top-[4.25rem] z-[120] max-h-[calc(100vh-5rem)] overflow-y-auto rounded-2xl bg-white/98 shadow-[0_8px_32px_rgba(196,181,253,0.3)] border border-purple-100"
-                style={{ backdropFilter: "blur(20px)" }}
+                className="block px-6 py-3 text-sm font-medium text-gray-700 hover:bg-[#EBE6F7]"
               >
-                <nav className="flex flex-col p-3 gap-0.5">
-                  {navLinks.map((link, i) => (
-                    <motion.div
-                      key={link.href}
-                      initial={{ x: -16, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ delay: i * 0.04 }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="block px-4 py-3.5 text-gray-700 hover:text-violet-800 hover:bg-violet-100 rounded-xl transition-all text-sm font-medium"
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  ))}
-                  <Link
-                    href="/shop"
-                    onClick={() => setMobileOpen(false)}
-                    className="mt-2 btn-primary text-sm text-center py-3"
-                  >
-                    Shop Now ✨
-                  </Link>
-                </nav>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
+                Cart {mounted && itemCount > 0 ? `(${itemCount})` : ""}
+              </Link>
+            </nav>
+          </>
+        )}
       </header>
-      {/* Spacer so content sits below fixed header */}
-      <div className="h-[3.75rem] sm:h-16 shrink-0" aria-hidden />
     </>
   );
 }

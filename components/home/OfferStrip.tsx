@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Sparkles, Tag } from "lucide-react";
@@ -39,7 +39,7 @@ export default function OfferStrip() {
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(90deg, #3b1fa3 0%, #4C1D95 35%, #1e3a8a 65%, #6D28D9 100%)",
+          background: "linear-gradient(90deg, #4a3482 0%, #6147A1 35%, #1e3a8a 65%, #7E6BAD 100%)",
         }}
       />
       {/* Shimmer overlay */}

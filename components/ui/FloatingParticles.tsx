@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef } from "react";
 
 export default function FloatingParticles() {
@@ -26,7 +26,7 @@ export default function FloatingParticles() {
       pulse: number;
     }[] = [];
 
-    const colors = ["#A855F7", "#5B21B6", "#FCD34D", "#F9A8D4", "#60A5FA", "#FFFFFF"];
+    const colors = ["#A855F7", "#8A7AB8", "#FCD34D", "#F9A8D4", "#60A5FA", "#FFFFFF"];
 
     for (let i = 0; i < 80; i++) {
       particles.push({

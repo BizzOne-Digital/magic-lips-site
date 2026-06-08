@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef, useState } from "react";
 import { isMobileClient } from "@/lib/isMobileClient";
 
@@ -50,13 +50,13 @@ export default function MagicCursor() {
 
     const onEnter = () => {
       hoveringRef.current = true;
-      cursor.style.background = "rgba(124,58,237,0.85)";
-      follower.style.borderColor = "rgba(124,58,237,0.6)";
+      cursor.style.background = "rgba(157,142,196,0.85)";
+      follower.style.borderColor = "rgba(157,142,196,0.6)";
     };
     const onLeave = () => {
       hoveringRef.current = false;
-      cursor.style.background = "rgba(91,33,182,0.9)";
-      follower.style.borderColor = "rgba(124,58,237,0.35)";
+      cursor.style.background = "rgba(142,125,184,0.9)";
+      follower.style.borderColor = "rgba(157,142,196,0.35)";
     };
 
     const buttons = document.querySelectorAll("a, button, [data-cursor]");
@@ -84,12 +84,12 @@ export default function MagicCursor() {
       <div
         ref={cursorRef}
         className="fixed top-0 left-0 w-3 h-3 rounded-full pointer-events-none z-[99999] transition-[background,transform] duration-200 ease-out"
-        style={{ background: "rgba(91,33,182,0.9)" }}
+        style={{ background: "rgba(142,125,184,0.9)" }}
       />
       <div
         ref={followerRef}
         className="fixed top-0 left-0 w-10 h-10 rounded-full pointer-events-none z-[99998] transition-[border-color,transform] duration-300 ease-out"
-        style={{ border: "1.5px solid rgba(124,58,237,0.35)" }}
+        style={{ border: "1.5px solid rgba(157,142,196,0.35)" }}
       />
     </>
   );

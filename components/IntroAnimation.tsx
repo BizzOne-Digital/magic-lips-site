@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -42,7 +42,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
 
       // 3. Logo glow pulse
       .to(logoRef.current, {
-        filter: "drop-shadow(0 0 40px rgba(91,33,182,0.9)) drop-shadow(0 0 80px rgba(139,92,246,0.5))",
+        filter: "drop-shadow(0 0 40px rgba(142,125,184,0.9)) drop-shadow(0 0 80px rgba(139,92,246,0.5))",
         duration: 0.8, ease: "power2.inOut", yoyo: true, repeat: 2,
       }, 1.2)
 
@@ -111,7 +111,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             transition={{ duration:8, repeat:Infinity, ease:"easeInOut" }}
             className="absolute inset-0 pointer-events-none"
             style={{
-              background:"radial-gradient(ellipse 60% 50% at 30% 50%, rgba(91,33,182,0.4) 0%, transparent 70%)",
+              background:"radial-gradient(ellipse 60% 50% at 30% 50%, rgba(142,125,184,0.4) 0%, transparent 70%)",
             }}
           />
           <motion.div
@@ -119,7 +119,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             transition={{ duration:6, repeat:Infinity, ease:"easeInOut", delay:1 }}
             className="absolute inset-0 pointer-events-none"
             style={{
-              background:"radial-gradient(ellipse 50% 60% at 70% 50%, rgba(124,58,237,0.3) 0%, transparent 70%)",
+              background:"radial-gradient(ellipse 50% 60% at 70% 50%, rgba(157,142,196,0.3) 0%, transparent 70%)",
             }}
           />
 
@@ -135,7 +135,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             >
               <svg width="18" height="18" viewBox="0 0 24 24"
                 fill={["#C4B5FD","#FDE68A","#FBCFE8","#BAE6FD","#E879F9"][i%5]}
-                style={{ filter:`drop-shadow(0 0 6px ${["#6D28D9","#F59E0B","#F9A8D4","#7DD3FC","#D946EF"][i%5]})` }}>
+                style={{ filter:`drop-shadow(0 0 6px ${["#9D8EC4","#F59E0B","#F9A8D4","#7DD3FC","#D946EF"][i%5]})` }}>
                 <path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5Z"/>
               </svg>
             </motion.div>
@@ -155,7 +155,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             className="absolute rounded-full pointer-events-none"
             style={{
               width:"480px", height:"480px",
-              border:"1px solid rgba(124,58,237,0.15)",
+              border:"1px solid rgba(157,142,196,0.15)",
             }}
           />
           {/* Third static ring */}
@@ -206,7 +206,7 @@ export default function IntroAnimation({ onComplete }: { onComplete: () => void 
             className="absolute bottom-0 left-0 h-[2px] origin-left"
             style={{
               width: "100%",
-              background: "linear-gradient(to right, #5B21B6, #4C1D95, #6D28D9, #7DD3FC, #FBCFE8)",
+              background: "linear-gradient(to right, #8A7AB8, #7E6BAD, #9D8EC4, #7DD3FC, #FBCFE8)",
               transform: "scaleX(0)",
             }}
           />

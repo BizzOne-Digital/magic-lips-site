@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ExternalLink } from "lucide-react";
@@ -86,7 +86,7 @@ export default function SocialSection() {
               href="https://tiktok.com/@magiclips02"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative rounded-2xl p-5 sm:p-6 overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
+              className="group relative rounded-2xl p-5 sm:p-6 overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition-all hover:shadow-[0_0_40px_rgba(157,142,196,0.2)] flex flex-col sm:flex-row items-center gap-4 sm:gap-6"
               style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(50,0,100,0.3) 100%)" }}
             >
               <div className="w-16 h-16 rounded-2xl bg-black flex items-center justify-center flex-shrink-0">

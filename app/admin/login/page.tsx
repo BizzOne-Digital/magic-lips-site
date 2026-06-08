@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#07051A] via-[#1E1050] to-[#07051A] flex items-center justify-center relative overflow-hidden">
       {/* Background orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, rgba(124,58,237,0.8) 0%, transparent 70%)" }} />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, rgba(157,142,196,0.8) 0%, transparent 70%)" }} />
       <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, rgba(29,78,216,0.8) 0%, transparent 70%)" }} />
 
       <motion.div
@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         className="w-full max-w-md px-4 sm:px-6"
       >
-        <div className="glass-dark rounded-3xl p-10 border border-purple-500/30 shadow-[0_0_60px_rgba(124,58,237,0.3)]">
+        <div className="glass-dark rounded-3xl p-10 border border-purple-500/30 shadow-[0_0_60px_rgba(157,142,196,0.3)]">
           <div className="text-center mb-8">
             <Image
               src="/logo.png"

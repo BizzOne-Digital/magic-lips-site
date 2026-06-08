@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef } from "react";
 
 interface Particle {
@@ -8,7 +8,7 @@ interface Particle {
   life: number; maxLife: number;
 }
 
-const COLORS = ["#4C1D95","#6D28D9","#C4B5FD","#BAE6FD","#F9A8D4","#FDE68A","#E879F9"];
+const COLORS = ["#7E6BAD","#9D8EC4","#C4B5FD","#BAE6FD","#F9A8D4","#FDE68A","#E879F9"];
 
 export default function ParticleField({ count = 60 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

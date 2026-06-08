@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+﻿import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -12,7 +12,7 @@ const config: Config = {
         brand: {
           lavender:    "#A78BFA",  // soft lavender
           "lavender-light": "#DDD6FE",
-          "lavender-dark":  "#5B21B6",
+          "lavender-dark":  "#8A7AB8",
           sky:         "#BAE6FD",  // sky blue
           "sky-light": "#F0F9FF",
           "sky-mid":   "#7DD3FC",
@@ -36,7 +36,7 @@ const config: Config = {
         "dark-gradient":   "linear-gradient(135deg, #1E1035 0%, #2D1F5E 50%, #1a1a3e 100%)",
         "card-gradient":   "linear-gradient(135deg, rgba(196,181,253,0.15) 0%, rgba(186,230,253,0.15) 100%)",
         "gold-gradient":   "linear-gradient(135deg, #F59E0B 0%, #FDE68A 50%, #D97706 100%)",
-        "lavender-gradient":"linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%)",
+        "lavender-gradient":"linear-gradient(135deg, #A78BFA 0%, #9D8EC4 100%)",
         "sky-gradient":    "linear-gradient(135deg, #BAE6FD 0%, #7DD3FC 100%)",
       },
       animation: {

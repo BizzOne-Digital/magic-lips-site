@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Playfair_Display, Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
@@ -53,7 +53,7 @@ export default function RootLayout({
               boxShadow: "0 8px 32px rgba(196,181,253,0.25)",
             },
             success: {
-              iconTheme: { primary: "#4C1D95", secondary: "white" },
+              iconTheme: { primary: "#7E6BAD", secondary: "white" },
             },
           }}
         />

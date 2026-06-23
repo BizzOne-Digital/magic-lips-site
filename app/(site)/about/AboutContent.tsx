@@ -1,7 +1,8 @@
 ﻿"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Leaf, MapPin, ShoppingBag, Mail } from "lucide-react";
+import { ShoppingBag, Mail } from "lucide-react";
+import FounderSection from "@/components/home/FounderSection";
 
 const values = [
   { title: "Premium Quality", description: "Every product is carefully formulated for the best gloss and wear." },
@@ -10,12 +11,6 @@ const values = [
   { title: "Made with Love", description: "Crafted with passion for every confident beauty lover." },
   { title: "Bold Colors", description: "From classic nudes to vibrant pops — express yourself." },
   { title: "Canadian Brand", description: "Proudly based in York, Ontario. Made for Canadians." },
-];
-
-const stats = [
-  { value: "500+", label: "Happy Customers", icon: Heart },
-  { value: "100%", label: "Cruelty Free", icon: Leaf },
-  { value: "York, ON", label: "Canadian Made", icon: MapPin },
 ];
 
 export default function AboutContent() {
@@ -44,21 +39,7 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 -mt-2 mb-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {stats.map(({ value, label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-4 p-4 rounded-xl bg-white border border-[#9D8EC4]/10 shadow-sm">
-              <div className="w-10 h-10 rounded-lg bg-[#F0ECFB] flex items-center justify-center flex-shrink-0">
-                <Icon className="w-5 h-5 text-[#9D8EC4]" />
-              </div>
-              <div>
-                <p className="text-lg font-bold text-[#1F2937]">{value}</p>
-                <p className="text-xs text-gray-500">{label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <FounderSection />
 
       <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -71,13 +52,13 @@ export default function AboutContent() {
                 The Magic Lips Story
               </h2>
               <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                Magic Lips started with a simple belief: everyone deserves to feel glamorous. Our founder Junie created the brand from a passion for bold beauty and the power of a perfect lip gloss.
+                Magic Lips is more than a brand — it&apos;s Destiny&apos;s dream turned into something real. It started with a love for lip gloss and grew into a whole vision: products that make you feel good, look good, and show up as yourself.
               </p>
               <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                Based in York, Ontario, we hand-select every product — from high-shine glosses to precision liners and adorable keychain accessories.
+                Every gloss, liner, and keychain is picked with care — because the details matter. Based in York, Ontario, Magic Lips is built for people who take their beauty seriously without taking themselves too seriously.
               </p>
               <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                Whether you want a subtle everyday shine or a bold statement, Magic Lips has what you need.
+                This is just the beginning.
               </p>
               <div className="flex gap-3 flex-wrap">
                 <Link href="/shop" className="btn-primary px-6 py-2.5 text-sm inline-flex items-center gap-2">
@@ -96,7 +77,7 @@ export default function AboutContent() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="rounded-xl p-6 sm:p-8 bg-white border border-[#9D8EC4]/10 text-center">
             <Image src="/logo.png" alt="Magic Lips" width={80} height={80} className="object-contain mx-auto mb-4" onError={(e) => { (e.target as HTMLImageElement).src = "/logo.svg"; }} />
-            <h3 className="text-2xl font-bold text-[#1F2937] mb-1" style={{ fontFamily: "var(--font-dancing)" }}>Junie</h3>
+            <h3 className="text-2xl font-bold text-[#1F2937] mb-1" style={{ fontFamily: "var(--font-dancing)" }}>Destiny</h3>
             <p className="text-[#9D8EC4] text-sm font-semibold mb-3">Founder & Beauty Expert</p>
             <p className="text-gray-500 text-sm italic" style={{ fontFamily: "var(--font-playfair)" }}>
               &ldquo;Every lip deserves to shine with magic.&rdquo;

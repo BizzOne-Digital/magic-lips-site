@@ -5,9 +5,6 @@ export default function SimpleHero() {
   return (
     <section className="bg-[#F0ECFB] py-16 sm:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-        <span className="inline-block px-4 py-1.5 rounded-full bg-white border border-[#9D8EC4]/30 text-[#6147A1] text-xs font-semibold uppercase tracking-widest mb-6">
-          Magic Lips | Premium Lip Beauty
-        </span>
         <h1
           className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1F2937] mb-5 leading-tight"
           style={{ fontFamily: "var(--font-playfair)" }}

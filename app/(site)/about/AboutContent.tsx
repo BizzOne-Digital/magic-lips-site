@@ -18,15 +18,6 @@ export default function AboutContent() {
     <div className="min-h-screen bg-white">
       <section className="py-12 sm:py-16 bg-[#F0ECFB]/40">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <Image
-            src="/logo.png"
-            alt="Magic Lips"
-            width={120}
-            height={120}
-            className="object-contain mx-auto mb-6"
-            priority
-            onError={(e) => { (e.target as HTMLImageElement).src = "/logo.svg"; }}
-          />
           <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
             About Magic Lips
           </h1>

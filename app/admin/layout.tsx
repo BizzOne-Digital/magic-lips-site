@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard, Package, ShoppingCart, Users, MessageSquare,
-  Layers, Image as ImageIcon, Settings, LogOut, Menu, X, ChevronRight,
+  Layers, Settings, LogOut, Menu, X, ChevronRight,
   Mail, Tag
 } from "lucide-react";
 
@@ -17,7 +17,6 @@ const navItems = [
   { href: "/admin/subscribers", icon: Users, label: "Subscribers" },
   { href: "/admin/messages", icon: MessageSquare, label: "Messages" },
   { href: "/admin/hero-slides", icon: Layers, label: "Hero Slides" },
-  { href: "/admin/gallery", icon: ImageIcon, label: "Gallery" },
   { href: "/admin/offers", icon: Tag, label: "Offers" },
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];

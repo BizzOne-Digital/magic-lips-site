@@ -5,7 +5,6 @@ import SimpleHero from "@/components/home/SimpleHero";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import OffersSection from "@/components/home/OffersSection";
-import GalleryPreview from "@/components/home/GalleryPreview";
 import ContactSection from "@/components/home/ContactSection";
 
 export default function HomePage() {
@@ -18,7 +17,6 @@ export default function HomePage() {
           <NewsletterSection />
           <CategoriesSection />
           <OffersSection />
-          <GalleryPreview />
           <ContactSection />
         </main>
         <Footer />

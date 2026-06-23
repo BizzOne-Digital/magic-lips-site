@@ -22,12 +22,12 @@ const dancing = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Magic Lips — Premium Lip Gloss & Beauty",
+  title: "Magic Lips",
   description:
     "Shop premium lip gloss, lip liners, and keychain gloss accessories at Magic Lips. Bold, glamorous, magical beauty for every look.",
   keywords: "lip gloss, lip liner, magic lips, beauty, makeup, keychain gloss, Toronto",
   openGraph: {
-    title: "Magic Lips — Premium Lip Gloss & Beauty",
+    title: "Magic Lips",
     description: "Bold, glamorous, magical beauty.",
     type: "website",
   },

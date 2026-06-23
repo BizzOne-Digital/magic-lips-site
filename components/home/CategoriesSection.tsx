@@ -37,7 +37,6 @@ export default function CategoriesSection() {
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-[#1F2937] mb-1">{cat.name}</h3>
-                <p className="text-gray-500 text-xs sm:text-sm">{cat.description}</p>
               </div>
             </Link>
           ))}

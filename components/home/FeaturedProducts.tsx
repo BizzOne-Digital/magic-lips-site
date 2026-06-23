@@ -33,7 +33,7 @@ export default function FeaturedProducts() {
   const addItem = useCartStore((s) => s.addItem);
 
   useEffect(() => {
-    fetch("/api/products?featured=true&limit=4")
+    fetch("/api/products?featured=true&limit=6")
       .then((r) => r.json())
       .then((d) => { setProducts(d.products?.length ? d.products : fallback); setLoading(false); })
       .catch(() => { setProducts(fallback); setLoading(false); });
@@ -52,7 +52,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 sm:py-20 bg-white" id="featured">
+    <section className="py-10 sm:py-14 bg-white" id="featured">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
@@ -62,13 +62,13 @@ export default function FeaturedProducts() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
               <div key={i} className="h-80 rounded-xl bg-gray-100 animate-pulse" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((p) => (
               <ProductCard
                 key={p._id}

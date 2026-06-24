@@ -105,13 +105,21 @@ export default function Header() {
         {mobileOpen && (
           <>
             <div className="fixed inset-0 z-40 bg-black/30 lg:hidden" onClick={() => setMobileOpen(false)} />
-            <nav className="lg:hidden absolute left-0 right-0 top-full bg-white border-b border-[#EBE6F7] shadow-md z-50 py-2">
+            <nav className="fixed top-0 right-0 h-full w-72 bg-white shadow-xl z-50 lg:hidden flex flex-col pt-20 pb-6 px-4 overflow-y-auto">
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                className="absolute top-4 right-4 p-2 rounded-lg hover:bg-[#EBE6F7]"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`block px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 mb-1 ${
                     pathname === link.href
                       ? "text-[#6147A1] bg-[#EBE6F7]"
                       : "text-gray-700 hover:bg-[#EBE6F7] hover:text-[#6147A1]"
@@ -123,7 +131,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 onClick={() => setMobileOpen(false)}
-                className="block px-6 py-3 text-sm font-medium text-gray-700 hover:bg-[#EBE6F7]"
+                className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#EBE6F7] mt-1"
               >
                 Cart {mounted && itemCount > 0 ? `(${itemCount})` : ""}
               </Link>

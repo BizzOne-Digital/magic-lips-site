@@ -58,7 +58,6 @@ export default function FeaturedProducts() {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
             Featured Products
           </h2>
-          <p className="text-gray-500 text-sm">Our most-loved lip essentials</p>
         </div>
 
         {loading ? (

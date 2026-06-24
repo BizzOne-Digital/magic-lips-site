@@ -4,7 +4,6 @@ import SiteEffects from "@/components/ui/SiteEffects";
 import SimpleHero from "@/components/home/SimpleHero";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
 import OffersSection from "@/components/home/OffersSection";
 import ContactSection from "@/components/home/ContactSection";
 
@@ -17,7 +16,6 @@ export default function HomePage() {
           <SimpleHero />
           <NewsletterSection />
           <CategoriesSection />
-          <FeaturedProducts />
           <OffersSection />
           <ContactSection />
         </main>

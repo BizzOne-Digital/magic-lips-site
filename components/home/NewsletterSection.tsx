@@ -22,7 +22,7 @@ export default function NewsletterSection() {
       const data = await res.json();
       if (res.ok || data.code) {
         setSubscribed(true);
-        setDiscountCode(data.code || "MAGIC10");
+        setDiscountCode(data.code || "MAGIC LIPS 12");
         toast.success("Welcome to Magic Lips!");
       } else {
         toast.error(data.error || "Something went wrong");

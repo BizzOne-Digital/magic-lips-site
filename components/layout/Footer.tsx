@@ -28,7 +28,7 @@ export default function Footer() {
       });
       const data = await res.json();
       if (res.ok || data.code) {
-        toast.success(`Subscribed! Your code: ${data.code || "MAGIC10"}`);
+        toast.success(`Subscribed! Your code: ${data.code || "MAGIC LIPS 12"}`);
         setEmail("");
       } else {
         toast.error(data.error || "Already subscribed");

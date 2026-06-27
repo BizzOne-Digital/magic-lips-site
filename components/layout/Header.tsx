@@ -32,7 +32,7 @@ export default function Header() {
     <>
       {/* Announcement bar */}
       <div className="bg-[#6147A1] text-white text-center text-xs sm:text-sm py-2 px-4">
-        New subscribers get 10% off their first order — use code <strong>MAGIC10</strong>
+        New subscribers get 10% off their first order — use code <strong>MAGIC LIPS 12</strong>
       </div>
 
       {/* Header */}

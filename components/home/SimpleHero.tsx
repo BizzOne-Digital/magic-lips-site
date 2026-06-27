@@ -22,12 +22,6 @@ export default function SimpleHero() {
           >
             Shop Now <ArrowRight className="w-4 h-4" />
           </Link>
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-sm font-semibold text-[#6147A1] bg-white border border-[#6147A1]/30 hover:bg-[#EBE6F7] transition-all duration-200"
-          >
-            Our Story
-          </Link>
         </div>
       </div>
     </section>

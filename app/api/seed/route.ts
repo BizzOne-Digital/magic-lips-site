@@ -121,7 +121,7 @@ export async function POST() {
         address: "3735 Dundas St W, York, ON M6S 2T6, Canada",
         instagramHandle: "magiclips2013",
         tiktokHandle: "magiclips02",
-        announcementBarText: "✨ New subscribers get 10% off their first order! Use code: MAGIC10 ✨",
+        announcementBarText: "✨ New subscribers get 10% off their first order! Use code: MAGIC LIPS 12 ✨",
         announcementBarActive: true,
         footerCopyright: "© 2024 Magic Lips. All rights reserved.",
         metaTitle: "Magic Lips — Premium Lip Gloss & Beauty",
@@ -137,7 +137,7 @@ export async function POST() {
         description: "10% off for new newsletter subscribers",
         type: "percentage",
         discountValue: 10,
-        couponCode: "MAGIC10",
+        couponCode: "MAGIC LIPS 12",
         isActive: true,
       },
       {

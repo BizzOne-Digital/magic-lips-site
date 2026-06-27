@@ -1,155 +1,160 @@
 ﻿"use client";
 import { useEffect, useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import { Filter, Search } from "lucide-react";
-import { useCartStore } from "@/store/cartStore";
+import { useSearchParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { getProductImage, getProductName } from "@/lib/productImages";
-import ProductCard from "@/components/ui/ProductCard";
-import toast from "react-hot-toast";
 
+interface Variant { name: string; image?: string; stock: number; }
 interface Product {
-  _id: string;
-  name: string;
-  slug: string;
-  price: number;
-  originalPrice?: number;
-  images: string[];
-  description: string;
-  isFeatured: boolean;
-  isBundle?: boolean;
-  stock: number;
-  category: { name: string; slug: string };
-  createdAt?: string;
+  _id: string; name: string; slug: string; price: number; originalPrice?: number;
+  images: string[]; description: string; isFeatured: boolean; isBundle?: boolean;
+  stock: number; category: { name: string; slug: string }; variants?: Variant[];
 }
-interface Category { _id: string; name: string; slug: string; }
+interface Category { _id: string; name: string; slug: string; image?: string; }
 
-const fallback: Product[] = [
-  { _id: "1", name: "Magic Lip Gloss", slug: "magic-lip-gloss", price: 12, images: ["/images/category-gloss.png"], description: "High-shine lip gloss for a bold glossy finish.", isFeatured: true, stock: 100, category: { name: "Lip Gloss", slug: "gloss" } },
-  { _id: "2", name: "Magic Lip Liner", slug: "magic-lip-liner", price: 8, images: ["/images/category-liner.png"], description: "Smooth lip liner to shape and define lips.", isFeatured: true, stock: 100, category: { name: "Lip Liners", slug: "liner" } },
-  { _id: "3", name: "Labubu Keychain Gloss", slug: "labubu-keychain-gloss", price: 15, images: ["/images/featured-keychain.png"], description: "Adorable Labubu keychain gloss — a playful beauty essential.", isFeatured: true, stock: 50, category: { name: "Labubu Keychain Gloss", slug: "keychain-gloss" } },
-  { _id: "4", name: "Gloss + Liner Bundle", slug: "gloss-liner-bundle", price: 17, originalPrice: 20, images: ["/images/category-bundles.png"], description: "Buy lip gloss and liner — liner for only $5.", isFeatured: true, isBundle: true, stock: 50, category: { name: "Lip Gloss", slug: "gloss" } },
-];
+// Category images map (same as CategoriesSection)
+const CAT_IMAGES: Record<string, string> = {
+  gloss:          "/images/category-gloss.png",
+  liner:          "/images/category-liner.png",
+  "keychain-gloss": "/images/category-keychain.png",
+  bags:           "/images/category-bags.png",
+  bundles:        "/images/category-bundles.png",
+};
 
 function ShopContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const activeCategory = searchParams.get("category") || "";
+
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [activeCategory, setActiveCategory] = useState(searchParams.get("category") || "all");
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState<"latest" | "price-asc" | "price-desc">("latest");
   const [loading, setLoading] = useState(true);
-  const addItem = useCartStore((s) => s.addItem);
-
-  useEffect(() => {
-    setActiveCategory(searchParams.get("category") || "all");
-  }, [searchParams]);
 
   useEffect(() => {
     fetch("/api/categories").then((r) => r.json()).then((d) => setCategories(d.categories || [])).catch(() => {});
     fetch("/api/products")
       .then((r) => r.json())
-      .then((d) => { setProducts(d.products?.length ? d.products : fallback); setLoading(false); })
-      .catch(() => { setProducts(fallback); setLoading(false); });
+      .then((d) => { setProducts(d.products?.length ? d.products : []); setLoading(false); })
+      .catch(() => { setLoading(false); });
   }, []);
 
-  const filtered = products
-    .filter((p) => {
-      const matchCat =
-        activeCategory === "all" ||
-        p.category?.slug === activeCategory ||
-        (activeCategory === "bundles" && p.isBundle);
-      const matchSearch = !search || p.name.toLowerCase().includes(search.toLowerCase());
-      return matchCat && matchSearch;
-    })
-    .sort((a, b) => {
-      if (sort === "price-asc") return a.price - b.price;
-      if (sort === "price-desc") return b.price - a.price;
-      return 0;
-    });
+  const catProducts = activeCategory
+    ? products.filter((p) => p.category?.slug === activeCategory)
+    : [];
 
-  const handleAdd = (p: Product) => {
-    addItem({ id: p._id, name: getProductName(p), price: p.price, quantity: 1, image: getProductImage(p), slug: p.slug });
-    toast.success(`${getProductName(p)} added to cart!`);
-  };
+  const activeCat = categories.find((c) => c.slug === activeCategory);
 
+  // ── Category grid (no category selected) ──────────────────────
+  if (!activeCategory) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16">
+          <div className="text-center mb-10">
+            <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+              Shop
+            </h1>
+            <p className="text-gray-500 text-sm">Choose a category to browse</p>
+          </div>
+
+          {loading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+              {[1,2,3,4,5].map((i) => <div key={i} className="h-52 rounded-xl bg-gray-100 animate-pulse" />)}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+              {categories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/shop?category=${cat.slug}`}
+                  className="card block hover:scale-[1.02] hover:shadow-md transition-all duration-200"
+                >
+                  <div className="aspect-[4/3] bg-[#F0ECFB] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={CAT_IMAGES[cat.slug] || "/images/category-gloss.png"} alt={cat.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-[#1F2937]">{cat.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Category product listing ───────────────────────────────────
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-20">
-        <div className="text-center mb-8 sm:mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
-            Shop
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-16">
+
+        {/* Back + heading */}
+        <div className="mb-8">
+          <button onClick={() => router.push("/shop")} className="inline-flex items-center gap-2 text-gray-500 hover:text-[#6147A1] text-sm mb-4 transition-colors duration-200">
+            <ArrowLeft className="w-4 h-4" /> All Categories
+          </button>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937]" style={{ fontFamily: "var(--font-playfair)" }}>
+            {activeCat?.name || activeCategory}
           </h1>
-          <p className="text-gray-500 text-sm">Premium lip gloss and beauty essentials</p>
-        </div>
-
-        <div className="flex flex-col lg:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-[#9D8EC4]/20 text-gray-700 placeholder-gray-400 text-sm focus:outline-none focus:border-[#9D8EC4] transition-colors duration-200"
-            />
-          </div>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as typeof sort)}
-            className="px-4 py-2.5 rounded-lg border border-[#9D8EC4]/20 text-sm text-gray-700 bg-white focus:outline-none focus:border-[#9D8EC4] transition-colors duration-200"
-          >
-            <option value="latest">Sort: Latest</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
-        </div>
-
-        <div className="flex items-center gap-2 flex-wrap mb-8">
-          <Filter className="w-4 h-4 text-gray-400 flex-shrink-0" />
-          {["all", ...categories.map((c) => c.slug)].map((slug) => {
-            const cat = categories.find((c) => c.slug === slug);
-            const label = slug === "all" ? "All" : cat?.name || slug;
-            const active = activeCategory === slug;
-            return (
-              <button
-                key={slug}
-                onClick={() => setActiveCategory(slug)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  active
-                    ? "bg-[#9D8EC4] text-white"
-                    : "bg-white text-gray-600 border border-[#9D8EC4]/20 hover:border-[#9D8EC4]/40"
-                }`}
-              >
-                {label}
-              </button>
-            );
-          })}
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-80 rounded-xl bg-gray-100 animate-pulse" />
-            ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            {[1,2,3,4].map((i) => <div key={i} className="h-64 rounded-xl bg-gray-100 animate-pulse" />)}
           </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            <p className="text-lg">No products found</p>
-          </div>
+        ) : catProducts.length === 0 ? (
+          <div className="text-center py-20 text-gray-400">No products found in this category.</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filtered.map((p) => (
-              <ProductCard
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            {catProducts.map((p) => (
+              <Link
                 key={p._id}
-                slug={p.slug}
-                name={getProductName(p)}
-                price={p.price}
-                originalPrice={p.originalPrice}
-                description={p.description}
-                image={getProductImage(p)}
-                stock={p.stock}
-                onAddToCart={() => handleAdd(p)}
-              />
+                href={`/shop/${p.slug}`}
+                className="card flex flex-col h-full group"
+              >
+                <div className="aspect-square bg-[#F0ECFB] overflow-hidden relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getProductImage(p)}
+                    alt={getProductName(p)}
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-200"
+                  />
+                  {p.variants && p.variants.length > 0 && (
+                    <span className="absolute top-2 right-2 bg-white/90 text-[#6147A1] text-[10px] font-semibold px-2 py-1 rounded-full border border-[#6147A1]/20">
+                      {p.variants.length} styles
+                    </span>
+                  )}
+                  {p.isBundle && (
+                    <span className="absolute top-2 left-2 bg-[#D4AF37] text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                      Bundle
+                    </span>
+                  )}
+                </div>
+                <div className="p-3 flex flex-col flex-1 gap-1">
+                  <h3 className="font-semibold text-[#1F2937] text-sm">{getProductName(p)}</h3>
+                  <p className="text-[#1F2937] font-bold text-sm mt-1">
+                    ${p.price} <span className="text-gray-400 font-normal text-xs">CAD</span>
+                    {p.originalPrice && p.originalPrice > p.price && (
+                      <span className="text-xs text-gray-400 line-through ml-1">${p.originalPrice}</span>
+                    )}
+                  </p>
+                  {p.variants && p.variants.length > 0 && (
+                    <ul className="mt-1.5 space-y-0.5">
+                      {p.variants.map((v) => (
+                        <li key={v.name} className="text-xs text-gray-500 flex items-center gap-1.5">
+                          <span className="w-1 h-1 rounded-full bg-[#9D8EC4] flex-shrink-0" />
+                          {v.name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <div className="mt-3 w-full py-2 rounded-lg text-xs font-semibold text-center text-white bg-[#6147A1] hover:bg-[#4f3a87] transition-colors duration-200">
+                    View Product →
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         )}

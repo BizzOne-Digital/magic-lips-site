@@ -7,12 +7,7 @@ export function generateOrderNumber(): string {
 }
 
 export function generateDiscountCode(): string {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let code = "MAGIC";
-  for (let i = 0; i < 6; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
+  return "MAGIC LIPS 12";
 }
 
 export function generateSlug(name: string): string {

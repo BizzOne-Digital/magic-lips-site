@@ -4,8 +4,8 @@ import Link from "next/link";
 const categories = [
   { name: "Lip Gloss", slug: "gloss", image: "/images/category-gloss.png", description: "High-shine glosses for bold, glossy lips." },
   { name: "Lip Liners", slug: "liner", image: "/images/category-liner.png", description: "Precision liners for clean, defined lips." },
-  { name: "Labubu Keychain Gloss", slug: "keychain-gloss", image: "/images/category-keychain.png", description: "Adorable Labubu keychain gloss for touch-ups on the go." },
-  { name: "Bags", slug: "bags", image: "/images/category-bags.png", description: "Stylish bags and pouches for beauty lovers." },
+  { name: "Labubu Keychain Lip Oil", slug: "keychain-gloss", image: "/images/category-keychain.png", description: "Adorable Labubu keychain lip oil for touch-ups on the go." },
+  { name: "Juicy Couture Bags", slug: "bags", image: "/images/category-bags.png", description: "Juicy Couture bags, purses & wallets." },
   { name: "Bundles", slug: "bundles", image: "/images/category-bundles.png", description: "Save more with our bundle deals." },
 ];
 

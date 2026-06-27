@@ -7,7 +7,6 @@ export async function POST() {
   try {
     await connectDB();
 
-    // Clear existing products and categories
     await Product.deleteMany({});
     await Category.deleteMany({});
 
@@ -15,8 +14,8 @@ export async function POST() {
     const categories = await Category.insertMany([
       { name: "Lip Gloss",             slug: "gloss",          description: "Premium lip glosses",                    order: 1 },
       { name: "Lip Liners",            slug: "liner",          description: "Smooth lip liners",                      order: 2 },
-      { name: "Labubu Keychain Gloss", slug: "keychain-gloss", description: "Cute Labubu keychain gloss accessories", order: 3 },
-      { name: "Bags",                  slug: "bags",           description: "Stylish bags and pouches",               order: 4 },
+      { name: "Labubu Keychain Lip Oil", slug: "keychain-gloss", description: "Cute Labubu keychain lip oil accessories", order: 3 },
+      { name: "Juicy Couture Bags",      slug: "bags",           description: "Juicy Couture bags, purses & wallets",       order: 4 },
       { name: "Bundles",               slug: "bundles",        description: "Save more with our bundle deals",        order: 5 },
     ]);
 
@@ -26,54 +25,208 @@ export async function POST() {
     const bagsCat     = categories[3];
     const bundlesCat  = categories[4];
 
-    // ── Products ───────────────────────────────────────────────
     await Product.insertMany([
 
-      // Lip Gloss (8)
-      { name: "Syrup Glow",   slug: "lip-gloss-syrup-glow",   description: "A rich, syrupy gloss with a high-shine finish.",           price: 12, category: glossCat._id, images: ["/images/products/gloss-syrup-glow.jpg"],   stock: 100, isFeatured: true,  isActive: true, sku: "ML-GLOSS-001", tags: ["gloss","lip","shine"] },
-      { name: "Cherry Amour", slug: "lip-gloss-cherry-amour", description: "Sweet cherry-tinted gloss with a beautiful shimmer.",      price: 12, category: glossCat._id, images: ["/images/products/gloss-cherry-amour.jpg"], stock: 100, isFeatured: true,  isActive: true, sku: "ML-GLOSS-002", tags: ["gloss","lip","cherry"] },
-      { name: "Juicy Berry",  slug: "lip-gloss-juicy-berry",  description: "Bold berry gloss packed with shine and colour.",           price: 12, category: glossCat._id, images: ["/images/products/gloss-juicy-berry.jpg"],  stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-003", tags: ["gloss","lip","berry"] },
-      { name: "Sugar High",   slug: "lip-gloss-sugar-high",   description: "Sweet, glittery gloss for a playful candy-inspired look.", price: 12, category: glossCat._id, images: ["/images/products/gloss-sugar-high.jpg"],   stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-004", tags: ["gloss","lip","glitter"] },
-      { name: "Lip Gloss",    slug: "lip-gloss-5",            description: "High-shine lip gloss for a bold, glossy finish.",          price: 12, category: glossCat._id, images: ["/images/products/gloss-5.jpg"],            stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-005", tags: ["gloss","lip"] },
-      { name: "Lip Gloss",    slug: "lip-gloss-6",            description: "High-shine lip gloss for a bold, glossy finish.",          price: 12, category: glossCat._id, images: ["/images/products/gloss-6.jpg"],            stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-006", tags: ["gloss","lip"] },
-      { name: "Lip Gloss",    slug: "lip-gloss-7",            description: "High-shine lip gloss for a bold, glossy finish.",          price: 12, category: glossCat._id, images: ["/images/products/gloss-7.jpg"],            stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-007", tags: ["gloss","lip"] },
-      { name: "Lip Gloss",    slug: "lip-gloss-8",            description: "High-shine lip gloss for a bold, glossy finish.",          price: 12, category: glossCat._id, images: ["/images/products/gloss-8.jpg"],            stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-008", tags: ["gloss","lip"] },
+      // ── LIP GLOSS ── 2 products ──────────────────────────────
 
-      // Lip Liners (3)
-      { name: "Goddess",               slug: "lip-liner-goddess",               description: "Rich pigment liner to define and shape your lips perfectly.", price: 8, category: linerCat._id, images: ["/images/products/liner-goddess.jpg"],              stock: 100, isFeatured: true,  isActive: true, sku: "ML-LINER-001", tags: ["liner","lip","define"] },
-      { name: "Blossom",               slug: "lip-liner-blossom",               description: "Soft blossom-toned liner for a natural everyday lip look.",   price: 8, category: linerCat._id, images: ["/images/products/liner-blossom.jpg"],              stock: 100, isFeatured: false, isActive: true, sku: "ML-LINER-002", tags: ["liner","lip","blossom"] },
-      { name: "Kiss Me Thru the Phone",slug: "lip-liner-kiss-me-thru-the-phone",description: "Bold statement liner for a dramatic, unforgettable lip look.", price: 8, category: linerCat._id, images: ["/images/products/liner-kiss-me-thru-the-phone.jpg"],stock: 100, isFeatured: false, isActive: true, sku: "ML-LINER-003", tags: ["liner","lip","bold"] },
+      // 1. Lip Gloss – Bottle (4 shades: bottle-style glosses)
+      {
+        name: "Lip Gloss – Bottle",
+        slug: "lip-gloss-bottle",
+        description: "High-shine bottle lip gloss with a beautiful heart-cap design. Long-lasting, non-sticky formula. Available in 4 shades.",
+        price: 12,
+        category: glossCat._id,
+        images: ["/images/products/gloss-syrup-glow.jpg"],
+        stock: 400,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-GLOSS-BTL",
+        tags: ["gloss", "lip", "bottle", "shine"],
+        variants: [
+          { name: "Syrup Glow",   image: "/images/products/gloss-syrup-glow.jpg",   stock: 100 },
+          { name: "Gloss 6",      image: "/images/products/gloss-6.jpg",            stock: 100 },
+          { name: "Gloss 7",      image: "/images/products/gloss-7.jpg",            stock: 100 },
+          { name: "Gloss 8",      image: "/images/products/gloss-8.jpg",            stock: 100 },
+        ],
+      },
 
-      // Labubu Keychain Gloss (2)
-      { name: "Sugar High Labubu Lip Gloss Keychain", slug: "labubu-keychain-sugar-high", description: "Adorable Labubu keychain with Sugar High lip gloss — a playful beauty essential.", price: 15, category: keychainCat._id, images: ["/images/products/keychain-sugar-high.jpg"], stock: 50, isFeatured: true, isActive: true, sku: "ML-KEY-001", tags: ["keychain","gloss","labubu","sugar high"] },
-      { name: "Syrup Glow Labubu Lip Gloss Keychain", slug: "labubu-keychain-syrup-glow", description: "Adorable Labubu keychain with Syrup Glow lip gloss — the perfect gift.",           price: 15, category: keychainCat._id, images: ["/images/products/keychain-syrup-glow.jpg"], stock: 50, isFeatured: true, isActive: true, sku: "ML-KEY-002", tags: ["keychain","gloss","labubu","syrup glow"] },
+      // 2. Lip Gloss – Tube (4 shades: tube-style glosses)
+      {
+        name: "Lip Gloss – Tube",
+        slug: "lip-gloss-tube",
+        description: "Smooth, hydrating tube lip gloss for a bold glossy finish. High-shine formula in 4 beautiful shades.",
+        price: 12,
+        category: glossCat._id,
+        images: ["/images/products/gloss-cherry-amour.jpg"],
+        tags: ["gloss", "lip", "tube", "shine"],
+        variants: [
+          { name: "Sugar High", image: "/images/products/gloss-sugar-high.jpg", stock: 100 },
+          { name: "Cherry Amour", image: "/images/products/gloss-cherry-amour.jpg", stock: 100 },
+          { name: "Juicy Berry",  image: "/images/products/gloss-juicy-berry.jpg",  stock: 100 },
+          { name: "Gloss 5",    image: "/images/products/gloss-5.jpg",          stock: 100 },
+        ],
+      },
 
-      // Bags (10)
-      { name: "Wallet 1",   slug: "bags-wallet-1",   description: "Stylish compact wallet — perfect for everyday carry.",                          price: 20, category: bagsCat._id, images: ["/images/products/bag-wallet-1.jpg"],   stock: 30, isFeatured: false, isActive: true, sku: "ML-BAG-W01", tags: ["bag","wallet"] },
-      { name: "Wallet 2",   slug: "bags-wallet-2",   description: "Stylish compact wallet — perfect for everyday carry.",                          price: 20, category: bagsCat._id, images: ["/images/products/bag-wallet-2.jpg"],   stock: 30, isFeatured: false, isActive: true, sku: "ML-BAG-W02", tags: ["bag","wallet"] },
-      { name: "Wallet 3",   slug: "bags-wallet-3",   description: "Stylish compact wallet — perfect for everyday carry.",                          price: 20, category: bagsCat._id, images: ["/images/products/bag-wallet-3.jpg"],   stock: 30, isFeatured: false, isActive: true, sku: "ML-BAG-W03", tags: ["bag","wallet"] },
-      { name: "Wallet 4",   slug: "bags-wallet-4",   description: "Stylish compact wallet — perfect for everyday carry.",                          price: 20, category: bagsCat._id, images: ["/images/products/bag-wallet-4.jpg"],   stock: 30, isFeatured: false, isActive: true, sku: "ML-BAG-W04", tags: ["bag","wallet"] },
-      { name: "Purse 1",    slug: "bags-purse-1",    description: "Elegant purse with a chic design for every occasion.",                          price: 35, category: bagsCat._id, images: ["/images/products/bag-purse-1.jpg"],    stock: 20, isFeatured: true,  isActive: true, sku: "ML-BAG-P01", tags: ["bag","purse"] },
-      { name: "Purse 2",    slug: "bags-purse-2",    description: "Elegant purse with a chic design for every occasion.",                          price: 35, category: bagsCat._id, images: ["/images/products/bag-purse-2.jpg"],    stock: 20, isFeatured: false, isActive: true, sku: "ML-BAG-P02", tags: ["bag","purse"] },
-      { name: "Purse 3",    slug: "bags-purse-3",    description: "Elegant purse with a chic design for every occasion.",                          price: 35, category: bagsCat._id, images: ["/images/products/bag-purse-3.jpg"],    stock: 20, isFeatured: false, isActive: true, sku: "ML-BAG-P03", tags: ["bag","purse"] },
-      { name: "Backpack 1", slug: "bags-backpack-1", description: "Stylish backpack with a fun girly design — perfect for school or everyday use.", price: 45, category: bagsCat._id, images: ["/images/products/bag-backpack-1.jpg"], stock: 15, isFeatured: true,  isActive: true, sku: "ML-BAG-B01", tags: ["bag","backpack"] },
-      { name: "Backpack 2", slug: "bags-backpack-2", description: "Stylish backpack with a fun girly design — perfect for school or everyday use.", price: 45, category: bagsCat._id, images: ["/images/products/bag-backpack-2.jpg"], stock: 15, isFeatured: false, isActive: true, sku: "ML-BAG-B02", tags: ["bag","backpack"] },
-      { name: "Backpack 3", slug: "bags-backpack-3", description: "Stylish backpack with a fun girly design — perfect for school or everyday use.", price: 45, category: bagsCat._id, images: ["/images/products/bag-backpack-3.jpg"], stock: 15, isFeatured: false, isActive: true, sku: "ML-BAG-B03", tags: ["bag","backpack"] },
+      // ── LIP LINERS ── 1 product, 3 shades ───────────────────
+      {
+        name: "Lip Liner",
+        slug: "lip-liner",
+        description: "Smooth, creamy lip liner that defines and shapes your lips perfectly. Long-wearing formula in 3 shades.",
+        price: 8,
+        category: linerCat._id,
+        images: ["/images/products/liner-goddess.jpg"],
+        stock: 300,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-LINER",
+        tags: ["liner", "lip", "define"],
+        variants: [
+          { name: "Goddess",                image: "/images/products/liner-goddess.jpg",               stock: 100 },
+          { name: "Blossom",                image: "/images/products/liner-blossom.jpg",               stock: 100 },
+          { name: "Kiss Me Thru the Phone", image: "/images/products/liner-kiss-me-thru-the-phone.jpg",stock: 100 },
+        ],
+      },
 
-      // Bundles (4)
-      { name: "Labubu Keychain with Lip Liner 1", slug: "bundle-labubu-keychain-lip-liner-1", description: "Labubu Keychain Lip Gloss bundled with a Lip Liner — the perfect gift set.", price: 20, category: bundlesCat._id, images: ["/images/products/bundle-labubu-liner-1.jpg"], stock: 30, isFeatured: true, isBundle: true, isActive: true, sku: "ML-BNDL-001", tags: ["bundle","keychain","liner","labubu"] },
-      { name: "Labubu Keychain with Lip Liner 2", slug: "bundle-labubu-keychain-lip-liner-2", description: "Labubu Keychain Lip Gloss bundled with a Lip Liner — the perfect gift set.", price: 20, category: bundlesCat._id, images: ["/images/products/bundle-labubu-liner-2.jpg"], stock: 30, isFeatured: true, isBundle: true, isActive: true, sku: "ML-BNDL-002", tags: ["bundle","keychain","liner","labubu"] },
-      { name: "Lip Gloss with Lip Liner 1",       slug: "bundle-lip-gloss-lip-liner-1",       description: "Magic Lip Gloss + Lip Liner — the perfect duo for a bold, glossy look.",   price: 17, originalPrice: 20, category: bundlesCat._id, images: ["/images/products/bundle-gloss-liner-1.jpg"], stock: 50, isFeatured: true, isBundle: true, isActive: true, sku: "ML-BNDL-003", tags: ["bundle","gloss","liner","deal"] },
-      { name: "Lip Gloss with Lip Liner 2",       slug: "bundle-lip-gloss-lip-liner-2",       description: "Magic Lip Gloss + Lip Liner — the perfect duo for a bold, glossy look.",   price: 17, originalPrice: 20, category: bundlesCat._id, images: ["/images/products/bundle-gloss-liner-2.jpg"], stock: 50, isFeatured: true, isBundle: true, isActive: true, sku: "ML-BNDL-004", tags: ["bundle","gloss","liner","deal"] },
+      // ── LABUBU KEYCHAIN GLOSS ── 1 product, 2 styles ────────
+      {
+        name: "Labubu Lip Oil Keychain",
+        slug: "labubu-keychain-gloss",
+        description: "Adorable Labubu character keychain with lip oil — the perfect cute accessory and gift. Available in 2 styles.",
+        price: 15,
+        category: keychainCat._id,
+        images: ["/images/products/keychain-sugar-high.jpg"],
+        stock: 100,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-KEY",
+        tags: ["keychain", "gloss", "labubu", "gift"],
+        variants: [
+          { name: "Happy Pink",  image: "/images/products/keychain-sugar-high.jpg", stock: 50 },
+          { name: "Boom Brown",  image: "/images/products/keychain-syrup-glow.jpg", stock: 50 },
+        ],
+      },
+
+      // ── BAGS ── 3 products ───────────────────────────────────
+
+      // Juicy Couture Mini Backpacks (3 styles)
+      {
+        name: "Juicy Couture Mini Backpack",
+        slug: "bags-mini-backpack",
+        description: "Cute & compact Juicy Couture mini backpack — perfect for everyday use. Available in 3 adorable styles.",
+        price: 45,
+        category: bagsCat._id,
+        images: ["/images/products/bag-backpack-1.jpg"],
+        stock: 45,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-BAG-BP",
+        tags: ["bag", "backpack", "juicy couture"],
+        variants: [
+          { name: "Pink Cherry",  image: "/images/products/bag-backpack-1.jpg", stock: 15 },
+          { name: "Love Heart",   image: "/images/products/bag-backpack-2.jpg", stock: 15 },
+          { name: "Ivory Paris",  image: "/images/products/bag-backpack-3.jpg", stock: 15 },
+        ],
+      },
+
+      // Juicy Couture Shoulder / Crossbody Bags (3 styles)
+      {
+        name: "Juicy Couture Shoulder / Crossbody Bag",
+        slug: "bags-shoulder-crossbody",
+        description: "Lightweight, stylish Juicy Couture shoulder bag — perfect for on-the-go. Available in 3 fun styles.",
+        price: 35,
+        category: bagsCat._id,
+        images: ["/images/products/bag-purse-1.jpg"],
+        stock: 60,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-BAG-SB",
+        tags: ["bag", "purse", "crossbody", "juicy couture"],
+        variants: [
+          { name: "Fruits Embroidery", image: "/images/products/bag-purse-1.jpg", stock: 20 },
+          { name: "Mint Stripe",       image: "/images/products/bag-purse-2.jpg", stock: 20 },
+          { name: "Juicy Couture",     image: "/images/products/bag-purse-3.jpg", stock: 20 },
+        ],
+      },
+
+      // Juicy Couture Wallets & Mini Cases (4 styles)
+      {
+        name: "Juicy Couture Wallet & Mini Case",
+        slug: "bags-wallet-mini-case",
+        description: "Small, cute Juicy Couture wallet & mini case — keeps your essentials organized in style. Available in 4 styles.",
+        price: 20,
+        category: bagsCat._id,
+        images: ["/images/products/bag-wallet-1.jpg"],
+        stock: 120,
+        isFeatured: false,
+        isActive: true,
+        sku: "ML-BAG-WL",
+        tags: ["bag", "wallet", "juicy couture"],
+        variants: [
+          { name: "Pink Strawberry", image: "/images/products/bag-wallet-1.jpg", stock: 30 },
+          { name: "Juicy Couture",   image: "/images/products/bag-wallet-2.jpg", stock: 30 },
+          { name: "Black Check",     image: "/images/products/bag-wallet-3.jpg", stock: 30 },
+          { name: "Pink Velvet",     image: "/images/products/bag-wallet-4.jpg", stock: 30 },
+        ],
+      },
+
+      // ── BUNDLES ── 2 products ────────────────────────────────
+
+      // Lip Gloss + Lip Liner Bundle (2 styles)
+      {
+        name: "Lip Gloss + Lip Liner Bundle",
+        slug: "bundle-lip-gloss-lip-liner",
+        description: "Magic Lip Gloss + Lip Liner — the perfect duo for a bold, glossy look. Save when you bundle!",
+        price: 17,
+        originalPrice: 20,
+        category: bundlesCat._id,
+        images: ["/images/products/bundle-gloss-liner-1.jpg"],
+        stock: 100,
+        isFeatured: true,
+        isBundle: true,
+        isActive: true,
+        sku: "ML-BNDL-GL",
+        tags: ["bundle", "gloss", "liner", "deal"],
+        variants: [
+          { name: "Style 1", image: "/images/products/bundle-gloss-liner-1.jpg", stock: 50 },
+          { name: "Style 2", image: "/images/products/bundle-gloss-liner-2.jpg", stock: 50 },
+        ],
+      },
+
+      // Labubu Keychain + Lip Liner Bundle (2 styles)
+      {
+        name: "Labubu Keychain + Lip Liner Bundle",
+        slug: "bundle-labubu-keychain-lip-liner",
+        description: "Adorable Labubu Keychain Lip Gloss + Lip Liner — the perfect gift set for beauty lovers!",
+        price: 20,
+        category: bundlesCat._id,
+        images: ["/images/products/bundle-labubu-liner-1.jpg"],
+        stock: 60,
+        isFeatured: true,
+        isBundle: true,
+        isActive: true,
+        sku: "ML-BNDL-KL",
+        tags: ["bundle", "keychain", "liner", "labubu", "gift"],
+        variants: [
+          { name: "Style 1", image: "/images/products/bundle-labubu-liner-1.jpg", stock: 30 },
+          { name: "Style 2", image: "/images/products/bundle-labubu-liner-2.jpg", stock: 30 },
+        ],
+      },
+
     ]);
 
     return NextResponse.json({
       success: true,
-      message: "Products and categories reset successfully!",
+      message: "Products reset successfully!",
       summary: {
         categories: 5,
-        products: 27,
-        breakdown: { lipGloss: 8, lipLiners: 3, labubuKeychain: 2, bags: 10, bundles: 4 },
+        products: 9,
+        breakdown: {
+          lipGloss: "2 (Bottle × 4 shades, Tube × 4 shades)",
+          lipLiners: "1 (3 shades)",
+          labubuKeychain: "1 (2 styles)",
+          bags: "3 (Backpacks × 3, Crossbody × 3, Wallets × 4)",
+          bundles: "2 (Gloss+Liner × 2, Labubu+Liner × 2)",
+        },
       },
     });
   } catch (error) {

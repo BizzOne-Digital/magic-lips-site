@@ -1,7 +1,7 @@
 ﻿"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Mail } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import FounderSection from "@/components/home/FounderSection";
 
 const values = [
@@ -32,38 +32,6 @@ export default function AboutContent() {
 
       <FounderSection />
 
-      <section className="py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="relative aspect-square max-w-md mx-auto w-full rounded-2xl overflow-hidden bg-[#F0ECFB] border border-[#9D8EC4]/10">
-              <Image src="/images/about-circle.png" alt="Magic Lips" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-            </div>
-            <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1F2937] mb-4" style={{ fontFamily: "var(--font-playfair)" }}>
-                The Magic Lips Story
-              </h2>
-              <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                Magic Lips is more than a brand — it&apos;s Destiny&apos;s dream turned into something real. It started with a love for lip gloss and grew into a whole vision: products that make you feel good, look good, and show up as yourself.
-              </p>
-              <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                Every gloss, liner, and keychain is picked with care — because the details matter. Based in York, Ontario, Magic Lips is built for people who take their beauty seriously without taking themselves too seriously.
-              </p>
-              <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                This is just the beginning.
-              </p>
-              <div className="flex gap-3 flex-wrap">
-                <Link href="/shop" className="btn-primary px-6 py-2.5 text-sm inline-flex items-center gap-2">
-                  <ShoppingBag className="w-4 h-4" /> Shop Collection
-                </Link>
-                <Link href="/contact" className="btn-secondary px-6 py-2.5 text-sm inline-flex items-center gap-2">
-                  <Mail className="w-4 h-4" /> Contact Us
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-12 sm:py-16 bg-[#FCE7F3]/30">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="rounded-xl p-6 sm:p-8 bg-white border border-[#9D8EC4]/10 text-center">
@@ -73,6 +41,16 @@ export default function AboutContent() {
             <p className="text-gray-500 text-sm italic" style={{ fontFamily: "var(--font-playfair)" }}>
               &ldquo;Every lip deserves to shine with magic.&rdquo;
             </p>
+          </div>
+
+          {/* About image */}
+          <div className="mt-10 rounded-2xl overflow-hidden border border-[#9D8EC4]/10 shadow-sm max-w-md mx-auto">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/about-circle.png"
+              alt="Magic Lips"
+              className="w-full h-auto object-contain"
+            />
           </div>
         </div>
       </section>

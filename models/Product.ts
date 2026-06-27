@@ -1,6 +1,12 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { getModel } from "@/lib/mongooseModel";
 
+export interface IVariant {
+  name: string;
+  image?: string;
+  stock: number;
+}
+
 export interface IProduct extends Document {
   name: string;
   slug: string;
@@ -11,6 +17,7 @@ export interface IProduct extends Document {
   images: string[];
   videos: string[];
   stock: number;
+  variants: IVariant[];
   isFeatured: boolean;
   isActive: boolean;
   isBundle: boolean;
@@ -20,6 +27,12 @@ export interface IProduct extends Document {
   weight?: number;
   createdAt: Date;
 }
+
+const VariantSchema = new Schema<IVariant>({
+  name: { type: String, required: true },
+  image: { type: String },
+  stock: { type: Number, default: 100 },
+}, { _id: false });
 
 const ProductSchema = new Schema<IProduct>(
   {
@@ -32,6 +45,7 @@ const ProductSchema = new Schema<IProduct>(
     images: [{ type: String }],
     videos: [{ type: String }],
     stock: { type: Number, default: 100 },
+    variants: [VariantSchema],
     isFeatured: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
     isBundle: { type: Boolean, default: false },

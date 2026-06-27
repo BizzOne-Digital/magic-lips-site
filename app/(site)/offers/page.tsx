@@ -1,5 +1,7 @@
 ﻿"use client";
+import { useState } from "react";
 import Link from "next/link";
+import NewsletterModal from "@/components/ui/NewsletterModal";
 import NewsletterSection from "@/components/home/NewsletterSection";
 
 const offers = [
@@ -9,23 +11,23 @@ const offers = [
     description: "Subscribe to our newsletter and get an exclusive 10% discount code for your first order.",
     details: ["Valid on all products", "One-time use per subscriber", "No minimum purchase required"],
     cta: "Subscribe & Get Code",
-    link: "/#newsletter",
+    link: null,
     bg: "bg-[#F0ECFB]",
   },
   {
     badge: "Bundle & Save",
     title: "Gloss + Liner Bundle Deal",
-    description: "Buy Magic Lip Gloss ($12) and get a Lip Liner for just $5 — save $3 off the regular liner price.",
+    description: "Buy Magic Lip Gloss ($12) and get a Lip Liner for just $5. Save $3 off the regular liner price.",
     details: ["Lip Gloss at regular $12 price", "Lip Liner discounted to just $5", "Perfect complete lip look"],
     cta: "View Offer",
-    link: "/shop/gloss-liner-bundle",
+    link: "/shop?category=bundles",
     bg: "bg-[#FCE7F3]",
   },
   {
     badge: "Shipping Offer",
     title: "Free Shipping on Orders $30+",
     description: "Enjoy free shipping across Canada on orders over $30.",
-    details: ["Available across Canada", "No code needed — auto-applied", "Fast and reliable delivery"],
+    details: ["Available across Canada", "No code needed, auto-applied", "Fast and reliable delivery"],
     cta: "Shop Now",
     link: "/shop",
     bg: "bg-[#DBEAFE]",
@@ -33,8 +35,12 @@ const offers = [
 ];
 
 export default function OffersPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
+      <NewsletterModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+
       <section className="py-12 sm:py-16 bg-gradient-to-br from-[#F0ECFB] to-[#FCE7F3]/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
@@ -58,9 +64,19 @@ export default function OffersPage() {
                   </li>
                 ))}
               </ul>
-              <Link href={offer.link} className="btn-primary text-sm px-6">
-                {offer.cta}
-              </Link>
+              {offer.link === null ? (
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(true)}
+                  className="btn-primary text-sm px-6"
+                >
+                  {offer.cta}
+                </button>
+              ) : (
+                <Link href={offer.link} className="btn-primary text-sm px-6">
+                  {offer.cta}
+                </Link>
+              )}
             </article>
           ))}
         </div>

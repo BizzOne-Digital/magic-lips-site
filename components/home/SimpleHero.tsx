@@ -13,7 +13,7 @@ export default function SimpleHero() {
           Made Simple
         </h1>
         <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-          Shop lip gloss, liners, Labubu keychain gloss and bags from Magic Lips — soft shine, everyday confidence.
+          Shop lip gloss, liners, Labubu keychain gloss and bags from Magic Lips. Soft shine, everyday confidence.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
           <Link

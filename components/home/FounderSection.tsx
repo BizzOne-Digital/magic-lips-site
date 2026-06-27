@@ -33,7 +33,7 @@ export default function FounderSection() {
             </h2>
             <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
               My goal is to create lip glosses that make people feel confident, comfortable, and unique.
-              Every idea, color, and detail is chosen with care — because I believe beauty should be fun,
+              Every idea, color, and detail is chosen with care. Because I believe beauty should be fun,
               inspiring, and personal. This business is not just about selling lip gloss. It&apos;s about
               turning a dream into reality and encouraging others to shine in their own way.
             </p>

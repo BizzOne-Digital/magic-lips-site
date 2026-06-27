@@ -9,7 +9,7 @@ const values = [
   { title: "Cruelty Free", description: "100% cruelty-free and vegan. Beauty without harm." },
   { title: "Beautiful Shine", description: "Our formula delivers soft shine and long-lasting wear." },
   { title: "Made with Love", description: "Crafted with passion for every confident beauty lover." },
-  { title: "Bold Colors", description: "From classic nudes to vibrant pops — express yourself." },
+  { title: "Bold Colors", description: "From classic nudes to vibrant pops. Express yourself." },
   { title: "Canadian Brand", description: "Proudly based in York, Ontario. Made for Canadians." },
 ];
 
@@ -37,7 +37,6 @@ export default function AboutContent() {
           <div className="rounded-xl p-6 sm:p-8 bg-white border border-[#9D8EC4]/10 text-center">
             <Image src="/logo.png" alt="Magic Lips" width={80} height={80} className="object-contain mx-auto mb-4" onError={(e) => { (e.target as HTMLImageElement).src = "/logo.svg"; }} />
             <h3 className="text-2xl font-bold text-[#1F2937] mb-1" style={{ fontFamily: "var(--font-dancing)" }}>Destiny</h3>
-            <p className="text-[#9D8EC4] text-sm font-semibold mb-3">Founder & Beauty Expert</p>
             <p className="text-gray-500 text-sm italic" style={{ fontFamily: "var(--font-playfair)" }}>
               &ldquo;Every lip deserves to shine with magic.&rdquo;
             </p>
@@ -84,9 +83,6 @@ export default function AboutContent() {
           <div className="flex gap-3 justify-center flex-wrap">
             <Link href="/shop" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm text-[#9D8EC4] bg-white hover:bg-[#F0ECFB] transition-all duration-200">
               <ShoppingBag className="w-4 h-4" /> Shop Now
-            </Link>
-            <Link href="/gallery" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full font-semibold text-sm text-white border border-white/40 hover:bg-white/10 transition-all duration-200">
-              View Gallery
             </Link>
           </div>
         </div>

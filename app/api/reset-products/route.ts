@@ -27,43 +27,48 @@ export async function POST() {
 
     await Product.insertMany([
 
-      // ── LIP GLOSS ── 2 products ──────────────────────────────
+      // ── LIP GLOSS ── 2 products (Tube + Bottle), same 4 shade names ──
+      // Insert Bottle first so Tube sorts first (API uses createdAt desc).
 
-      // 1. Lip Gloss – Bottle (4 shades: bottle-style glosses)
+      // 1. Lip Gloss – Bottle (4 shades — same names as Tube)
       {
         name: "Lip Gloss – Bottle",
         slug: "lip-gloss-bottle",
         description: "High-shine bottle lip gloss with a beautiful heart-cap design. Long-lasting, non-sticky formula. Available in 4 shades.",
         price: 12,
         category: glossCat._id,
-        images: ["/images/products/gloss-syrup-glow.jpg"],
+        images: ["/images/products/gloss-bottle-syrup-glow.jpg"],
         stock: 400,
         isFeatured: true,
         isActive: true,
         sku: "ML-GLOSS-BTL",
         tags: ["gloss", "lip", "bottle", "shine"],
         variants: [
-          { name: "Syrup Glow",   image: "/images/products/gloss-syrup-glow.jpg",   stock: 100 },
-          { name: "Gloss 6",      image: "/images/products/gloss-6.jpg",            stock: 100 },
-          { name: "Gloss 7",      image: "/images/products/gloss-7.jpg",            stock: 100 },
-          { name: "Gloss 8",      image: "/images/products/gloss-8.jpg",            stock: 100 },
+          { name: "Syrup Glow",   image: "/images/products/gloss-bottle-syrup-glow.jpg",   stock: 100 },
+          { name: "Cherry Amour", image: "/images/products/gloss-bottle-cherry-amour.jpg", stock: 100 },
+          { name: "Juicy Berry",  image: "/images/products/gloss-bottle-juicy-berry.jpg",  stock: 100 },
+          { name: "Sugar High",   image: "/images/products/gloss-bottle-sugar-high.jpg",   stock: 100 },
         ],
       },
 
-      // 2. Lip Gloss – Tube (4 shades: tube-style glosses)
+      // 2. Lip Gloss – Tube (4 shades)
       {
         name: "Lip Gloss – Tube",
         slug: "lip-gloss-tube",
         description: "Smooth, hydrating tube lip gloss for a bold glossy finish. High-shine formula in 4 beautiful shades.",
         price: 12,
         category: glossCat._id,
-        images: ["/images/products/gloss-cherry-amour.jpg"],
+        images: ["/images/products/gloss-tube-sugar-high.jpg"],
+        stock: 400,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-GLOSS-TUBE",
         tags: ["gloss", "lip", "tube", "shine"],
         variants: [
-          { name: "Sugar High", image: "/images/products/gloss-sugar-high.jpg", stock: 100 },
-          { name: "Cherry Amour", image: "/images/products/gloss-cherry-amour.jpg", stock: 100 },
-          { name: "Juicy Berry",  image: "/images/products/gloss-juicy-berry.jpg",  stock: 100 },
-          { name: "Gloss 5",    image: "/images/products/gloss-5.jpg",          stock: 100 },
+          { name: "Sugar High",   image: "/images/products/gloss-tube-sugar-high.jpg",   stock: 100 },
+          { name: "Cherry Amour", image: "/images/products/gloss-tube-cherry-amour.jpg", stock: 100 },
+          { name: "Juicy Berry",  image: "/images/products/gloss-tube-juicy-berry.jpg",  stock: 100 },
+          { name: "Syrup Glow",   image: "/images/products/gloss-tube-syrup-glow.jpg",   stock: 100 },
         ],
       },
 
@@ -101,8 +106,8 @@ export async function POST() {
         sku: "ML-KEY",
         tags: ["keychain", "gloss", "labubu", "gift"],
         variants: [
-          { name: "Happy Pink",  image: "/images/products/keychain-sugar-high.jpg", stock: 50 },
-          { name: "Boom Brown",  image: "/images/products/keychain-syrup-glow.jpg", stock: 50 },
+          { name: "Happy Time", image: "/images/products/keychain-sugar-high.jpg", stock: 50 },
+          { name: "Boom",       image: "/images/products/keychain-syrup-glow.jpg", stock: 50 },
         ],
       },
 
@@ -123,8 +128,8 @@ export async function POST() {
         tags: ["bag", "backpack", "juicy couture"],
         variants: [
           { name: "Pink Cherry",  image: "/images/products/bag-backpack-1.jpg", stock: 15 },
-          { name: "Love Heart",   image: "/images/products/bag-backpack-2.jpg", stock: 15 },
-          { name: "Ivory Paris",  image: "/images/products/bag-backpack-3.jpg", stock: 15 },
+          { name: "Love Heart",   image: "/images/products/bag-backpack-3.jpg", stock: 15 },
+          { name: "Ivory Paris",  image: "/images/products/bag-backpack-2.jpg", stock: 15 },
         ],
       },
 
@@ -155,16 +160,16 @@ export async function POST() {
         description: "Small, cute Juicy Couture wallet & mini case — keeps your essentials organized in style. Available in 4 styles.",
         price: 20,
         category: bagsCat._id,
-        images: ["/images/products/bag-wallet-1.jpg"],
+        images: ["/images/products/bag-wallet-3.jpg"],
         stock: 120,
         isFeatured: false,
         isActive: true,
         sku: "ML-BAG-WL",
         tags: ["bag", "wallet", "juicy couture"],
         variants: [
-          { name: "Pink Strawberry", image: "/images/products/bag-wallet-1.jpg", stock: 30 },
+          { name: "Pink Strawberry", image: "/images/products/bag-wallet-3.jpg", stock: 30 },
           { name: "Juicy Couture",   image: "/images/products/bag-wallet-2.jpg", stock: 30 },
-          { name: "Black Check",     image: "/images/products/bag-wallet-3.jpg", stock: 30 },
+          { name: "Black Check",     image: "/images/products/bag-wallet-1.jpg", stock: 30 },
           { name: "Pink Velvet",     image: "/images/products/bag-wallet-4.jpg", stock: 30 },
         ],
       },

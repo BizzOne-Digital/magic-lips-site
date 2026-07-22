@@ -7,17 +7,19 @@ import { motion } from "framer-motion";
 import {
   LayoutDashboard, Package, ShoppingCart, Users, MessageSquare,
   Layers, Settings, LogOut, Menu, X, ChevronRight,
-  Mail, Tag
+  Tag, Image as ImageIcon, FileText
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { href: "/admin/products", icon: Package, label: "Products" },
   { href: "/admin/orders", icon: ShoppingCart, label: "Orders" },
+  { href: "/admin/pages", icon: FileText, label: "Page Content" },
   { href: "/admin/subscribers", icon: Users, label: "Subscribers" },
   { href: "/admin/messages", icon: MessageSquare, label: "Messages" },
   { href: "/admin/hero-slides", icon: Layers, label: "Hero Slides" },
-  { href: "/admin/offers", icon: Tag, label: "Offers" },
+  { href: "/admin/offers", icon: Tag, label: "Offers / Coupons" },
+  { href: "/admin/gallery", icon: ImageIcon, label: "Gallery" },
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];
 

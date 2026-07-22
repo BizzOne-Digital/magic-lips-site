@@ -131,12 +131,12 @@ function ProductDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Image */}
-          <div className="aspect-square rounded-xl overflow-hidden border border-[#9D8EC4]/10 relative bg-[#F0ECFB]">
+          <div className="aspect-square rounded-xl overflow-hidden border border-[#9D8EC4]/10 relative bg-[#F0ECFB] p-6 sm:p-8">
             <Image
               src={displayImage}
               alt={displayName}
               fill
-              className="object-cover"
+              className="object-contain p-6 sm:p-8"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
               onError={() => setImgSrc("/images/category-gloss.png")}
@@ -173,7 +173,8 @@ function ProductDetail() {
             {hasVariants && (
               <div>
                 <p className="text-sm font-semibold text-[#1F2937] mb-2">
-                  Shade: <span className="text-[#6147A1]">{selectedVariant?.name}</span>
+                  {product.category?.slug === "gloss" || product.category?.slug === "liner" ? "Shade" : "Style"}:{" "}
+                  <span className="text-[#6147A1]">{selectedVariant?.name}</span>
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {product.variants!.map((v) => (

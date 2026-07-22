@@ -79,7 +79,8 @@ export default function AdminDashboard() {
         <h2 className="text-lg font-semibold text-white mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
           {[
-            { label: "Add Product", href: "/admin/products/new" },
+            { label: "Add Product", href: "/admin/products" },
+            { label: "Page Content", href: "/admin/pages" },
             { label: "View Orders", href: "/admin/orders" },
             { label: "Manage Slides", href: "/admin/hero-slides" },
             { label: "View Messages", href: "/admin/messages" },

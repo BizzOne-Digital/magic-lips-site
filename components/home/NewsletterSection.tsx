@@ -2,12 +2,18 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Mail } from "lucide-react";
+import { usePageContent } from "@/lib/useCmsContent";
+import { PAGE_CONTENT_DEFAULTS } from "@/lib/pageContentDefaults";
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
+  const { content } = usePageContent<{ newsletterTitle: string; newsletterSubtitle: string }>(
+    "home",
+    PAGE_CONTENT_DEFAULTS.home as unknown as { newsletterTitle: string; newsletterSubtitle: string }
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +50,10 @@ export default function NewsletterSection() {
           Exclusive Offer
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold text-[#1F2937] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
-          Get <span className="text-[#9D8EC4]">10% Off</span> Your First Order
+          {content.newsletterTitle || "Get 10% Off Your First Order"}
         </h2>
         <p className="text-gray-500 text-sm mb-8 max-w-sm mx-auto">
-          Subscribe with your email and save on your first purchase.
+          {content.newsletterSubtitle || "Subscribe with your email and save on your first purchase."}
         </p>
 
         {!subscribed ? (

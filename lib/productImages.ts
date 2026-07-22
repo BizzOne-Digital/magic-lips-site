@@ -27,7 +27,7 @@ export const categoryImagesByCategorySlug: Record<string, string> = {
 };
 
 export const productNamesBySlug: Record<string, string> = {
-  "labubu-keychain-gloss": "Labubu Keychain Gloss",
+  "labubu-keychain-gloss": "Labubu Lip Oil Keychain",
 };
 
 export function getProductImage(product: ProductLike): string {

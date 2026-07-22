@@ -27,12 +27,12 @@ export default function ProductCard({
   return (
     <article className="card flex flex-col h-full">
       <Link href={`/shop/${slug}`} className="block">
-        <div className="relative aspect-square bg-[#F0ECFB] overflow-hidden">
+        <div className="relative aspect-square bg-[#F0ECFB] overflow-hidden p-4 sm:p-5">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+            className="object-contain p-4 sm:p-5 transition-transform duration-200 group-hover:scale-[1.02]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </div>

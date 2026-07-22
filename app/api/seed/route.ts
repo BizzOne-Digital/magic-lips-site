@@ -29,26 +29,84 @@ export async function POST() {
 
     // Products
     await Product.insertMany([
-      // ── Lip Gloss ──────────────────────────────────────────────
-      { name: "Syrup Glow", slug: "lip-gloss-syrup-glow", description: "A rich, syrupy gloss with a high-shine finish. Long-lasting formula for a bold glossy look.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: true, isActive: true, sku: "ML-GLOSS-001", tags: ["gloss", "lip", "shine"] },
-      { name: "Cherry Amour", slug: "lip-gloss-cherry-amour", description: "Sweet cherry-tinted gloss with a beautiful shimmer and lasting shine.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: true, isActive: true, sku: "ML-GLOSS-002", tags: ["gloss", "lip", "cherry"] },
-      { name: "Juicy Berry", slug: "lip-gloss-juicy-berry", description: "Bold berry gloss packed with shine and a juicy pop of colour.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-003", tags: ["gloss", "lip", "berry"] },
-      { name: "Sugar High", slug: "lip-gloss-sugar-high", description: "Sweet, glittery gloss for a playful, candy-inspired look.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-004", tags: ["gloss", "lip", "glitter"] },
-      { name: "Lip Gloss", slug: "lip-gloss-5", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-005", tags: ["gloss", "lip"] },
-      { name: "Lip Gloss", slug: "lip-gloss-6", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-006", tags: ["gloss", "lip"] },
-      { name: "Lip Gloss", slug: "lip-gloss-7", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-007", tags: ["gloss", "lip"] },
-      { name: "Lip Gloss", slug: "lip-gloss-8", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-008", tags: ["gloss", "lip"] },
-      { name: "Lip Gloss", slug: "lip-gloss-9", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-009", tags: ["gloss", "lip"] },
-      { name: "Lip Gloss", slug: "lip-gloss-10", description: "High-shine lip gloss for a bold, glossy finish.", price: 12, category: glossCat._id, images: ["/images/category-gloss.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-GLOSS-010", tags: ["gloss", "lip"] },
+      // ── Lip Gloss (Tube + Bottle, same 4 shade names) ───────────
+      {
+        name: "Lip Gloss – Bottle",
+        slug: "lip-gloss-bottle",
+        description: "High-shine bottle lip gloss with a beautiful heart-cap design. Long-lasting, non-sticky formula. Available in 4 shades.",
+        price: 12,
+        category: glossCat._id,
+        images: ["/images/products/gloss-bottle-syrup-glow.jpg"],
+        stock: 400,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-GLOSS-BTL",
+        tags: ["gloss", "lip", "bottle", "shine"],
+        variants: [
+          { name: "Syrup Glow", image: "/images/products/gloss-bottle-syrup-glow.jpg", stock: 100 },
+          { name: "Cherry Amour", image: "/images/products/gloss-bottle-cherry-amour.jpg", stock: 100 },
+          { name: "Juicy Berry", image: "/images/products/gloss-bottle-juicy-berry.jpg", stock: 100 },
+          { name: "Sugar High", image: "/images/products/gloss-bottle-sugar-high.jpg", stock: 100 },
+        ],
+      },
+      {
+        name: "Lip Gloss – Tube",
+        slug: "lip-gloss-tube",
+        description: "Smooth, hydrating tube lip gloss for a bold glossy finish. High-shine formula in 4 beautiful shades.",
+        price: 12,
+        category: glossCat._id,
+        images: ["/images/products/gloss-tube-sugar-high.jpg"],
+        stock: 400,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-GLOSS-TUBE",
+        tags: ["gloss", "lip", "tube", "shine"],
+        variants: [
+          { name: "Sugar High", image: "/images/products/gloss-tube-sugar-high.jpg", stock: 100 },
+          { name: "Cherry Amour", image: "/images/products/gloss-tube-cherry-amour.jpg", stock: 100 },
+          { name: "Juicy Berry", image: "/images/products/gloss-tube-juicy-berry.jpg", stock: 100 },
+          { name: "Syrup Glow", image: "/images/products/gloss-tube-syrup-glow.jpg", stock: 100 },
+        ],
+      },
 
       // ── Lip Liners ─────────────────────────────────────────────
-      { name: "Goddess", slug: "lip-liner-goddess", description: "Smooth, creamy lip liner with a rich pigment to define and shape your lips perfectly.", price: 8, category: linerCat._id, images: ["/images/category-liner.png"], stock: 100, isFeatured: true, isActive: true, sku: "ML-LINER-001", tags: ["liner", "lip", "define"] },
-      { name: "Blossom", slug: "lip-liner-blossom", description: "Soft blossom-toned liner for a natural, everyday lip look.", price: 8, category: linerCat._id, images: ["/images/category-liner.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-LINER-002", tags: ["liner", "lip", "blossom"] },
-      { name: "Kiss Me Thru the Phone", slug: "lip-liner-kiss-me-thru-the-phone", description: "Bold, statement liner for a dramatic, unforgettable lip look.", price: 8, category: linerCat._id, images: ["/images/category-liner.png"], stock: 100, isFeatured: false, isActive: true, sku: "ML-LINER-003", tags: ["liner", "lip", "bold"] },
+      {
+        name: "Lip Liner",
+        slug: "lip-liner",
+        description: "Smooth, creamy lip liner that defines and shapes your lips perfectly. Long-wearing formula in 3 shades.",
+        price: 8,
+        category: linerCat._id,
+        images: ["/images/products/liner-goddess.jpg"],
+        stock: 300,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-LINER",
+        tags: ["liner", "lip", "define"],
+        variants: [
+          { name: "Goddess", image: "/images/products/liner-goddess.jpg", stock: 100 },
+          { name: "Blossom", image: "/images/products/liner-blossom.jpg", stock: 100 },
+          { name: "Kiss Me Thru the Phone", image: "/images/products/liner-kiss-me-thru-the-phone.jpg", stock: 100 },
+        ],
+      },
 
-      // ── Labubu Keychain Gloss ──────────────────────────────────
-      { name: "Sugar High Labubu Lip Gloss Keychain", slug: "labubu-keychain-sugar-high", description: "Adorable Labubu keychain with Sugar High lip gloss — a playful beauty essential and cute accessory.", price: 15, category: keychainCat._id, images: ["/images/category-keychain.png"], stock: 50, isFeatured: true, isActive: true, sku: "ML-KEY-001", tags: ["keychain", "gloss", "labubu", "sugar high"] },
-      { name: "Syrup Glow Labubu Lip Gloss Keychain", slug: "labubu-keychain-syrup-glow", description: "Adorable Labubu keychain with Syrup Glow lip gloss — the perfect gift for beauty lovers.", price: 15, category: keychainCat._id, images: ["/images/category-keychain.png"], stock: 50, isFeatured: true, isActive: true, sku: "ML-KEY-002", tags: ["keychain", "gloss", "labubu", "syrup glow"] },
+      // ── Labubu Keychain Lip Oil ────────────────────────────────
+      {
+        name: "Labubu Lip Oil Keychain",
+        slug: "labubu-keychain-gloss",
+        description: "Adorable Labubu character keychain with lip oil — the perfect cute accessory and gift. Available in 2 styles.",
+        price: 15,
+        category: keychainCat._id,
+        images: ["/images/products/keychain-sugar-high.jpg"],
+        stock: 100,
+        isFeatured: true,
+        isActive: true,
+        sku: "ML-KEY",
+        tags: ["keychain", "gloss", "labubu", "gift"],
+        variants: [
+          { name: "Happy Time", image: "/images/products/keychain-sugar-high.jpg", stock: 50 },
+          { name: "Boom", image: "/images/products/keychain-syrup-glow.jpg", stock: 50 },
+        ],
+      },
 
       // ── Bags ───────────────────────────────────────────────────
       { name: "Wallet 1", slug: "bags-wallet-1", description: "Stylish compact wallet — perfect for everyday carry.", price: 20, category: bagsCat._id, images: ["/images/category-bags.png"], stock: 30, isFeatured: false, isActive: true, sku: "ML-BAG-W01", tags: ["bag", "wallet"] },

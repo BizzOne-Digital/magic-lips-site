@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "@/store/cartStore";
 import { ShoppingBag, Menu, X } from "lucide-react";
+import { useSiteSettings } from "@/lib/useCmsContent";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,6 +20,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const itemCount = useCartStore((s) => s.getItemCount());
+  const { settings } = useSiteSettings();
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -30,10 +32,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-[#6147A1] text-white text-center text-xs sm:text-sm py-2 px-4">
-        New subscribers get 10% off their first order — use code <strong>MAGIC LIPS 12</strong>
-      </div>
+      {settings.announcementBarActive && settings.announcementBarText && (
+        <div className="bg-[#6147A1] text-white text-center text-xs sm:text-sm py-2 px-4">
+          {settings.announcementBarText}
+        </div>
+      )}
 
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-[#EBE6F7] shadow-sm">
@@ -42,8 +45,8 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <Image
-              src="/logo.png"
-              alt="Magic Lips"
+              src={settings.logoUrl || "/logo.png"}
+              alt={settings.businessName || "Magic Lips"}
               width={36}
               height={36}
               className="object-contain"
@@ -53,7 +56,7 @@ export default function Header() {
               className="font-bold text-lg hidden sm:block text-[#6147A1]"
               style={{ fontFamily: "var(--font-dancing)" }}
             >
-              Magic Lips
+              {settings.businessName || "Magic Lips"}
             </span>
           </Link>
 

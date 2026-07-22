@@ -23,7 +23,7 @@ interface Product {
 const fallback: Product[] = [
   { _id: "1", name: "Magic Lip Gloss", slug: "magic-lip-gloss", price: 12, images: ["/images/featured-gloss.png"], description: "High-shine lip gloss for a bold glossy finish.", isFeatured: true, stock: 100, category: { name: "Gloss" } },
   { _id: "2", name: "Magic Lip Liner", slug: "magic-lip-liner", price: 8, images: ["/images/featured-liner.png"], description: "Smooth lip liner to shape and define lips.", isFeatured: true, stock: 100, category: { name: "Liner" } },
-  { _id: "3", name: "Labubu Keychain Gloss", slug: "labubu-keychain-gloss", price: 15, images: ["/images/featured-keychain.png"], description: "Cute keychain gloss with a playful beauty vibe.", isFeatured: true, stock: 50, category: { name: "Keychain Gloss" } },
+  { _id: "3", name: "Labubu Lip Oil Keychain", slug: "labubu-keychain-gloss", price: 15, images: ["/images/featured-keychain.png"], description: "Cute Labubu keychain with lip oil — perfect on-the-go accessory.", isFeatured: true, stock: 50, category: { name: "Labubu Keychain Lip Oil" } },
   { _id: "4", name: "Gloss + Liner Bundle", slug: "gloss-liner-bundle", price: 17, originalPrice: 20, images: ["/images/featured-bundle.png"], description: "Buy lip gloss and liner — liner for only $5.", isFeatured: true, isBundle: true, stock: 50, category: { name: "Gloss" } },
 ];
 

@@ -114,12 +114,12 @@ function ShopContent() {
                 href={`/shop/${p.slug}`}
                 className="card flex flex-col h-full group"
               >
-                <div className="aspect-square bg-[#F0ECFB] overflow-hidden relative">
+                <div className="aspect-square bg-[#F0ECFB] overflow-hidden relative flex items-center justify-center p-4 sm:p-5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={getProductImage(p)}
                     alt={getProductName(p)}
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-200"
+                    className="max-w-full max-h-full w-auto h-auto object-contain group-hover:scale-[1.03] transition-transform duration-200"
                   />
                   {p.variants && p.variants.length > 0 && (
                     <span className="absolute top-2 right-2 bg-white/90 text-[#6147A1] text-[10px] font-semibold px-2 py-1 rounded-full border border-[#6147A1]/20">
